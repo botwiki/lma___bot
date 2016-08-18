@@ -26,7 +26,12 @@ user_stream.on('message', function (msg) {
     if (block_user_id){
       T.post('blocks/create', { user_id: block_user_id }, function (err, data, response) {
         if (!err){
-          console.log('Blocked @' + block_user_screen_name + '!');
+          T.post('statuses/update', { status: 'Blocked @' + block_user_screen_name + '!' }, function(err, data, response) {
+            if (err){
+              console.log('Error!');
+              console.log(err);
+            }
+          });
         }
         else{
           console.log('Error!');
