@@ -5,13 +5,11 @@ var path = require('path'),
     user_stream = T.stream('user');
 
 user_stream.on('message', function (msg) {
-  if (msg.event !== 'unblock' && (msg.source && msg.source !== config.twitter.bot_user_id_str)){
-/*
-    console.log(msg);
-*/
-    console.log(msg.event);
+  if (msg.event !== 'unblock' && (msg.source && msg.source.id_str !== config.twitter.bot_user_id_str)){
+/*  console.log(msg); */
+    console.log('Event: ' + msg.event);
     if (msg.source){
-      console.log('@' + msg.source.screen_name);
+      console.log('Source: @' + msg.source.screen_name);
     }
 
     var block_user_id;
